@@ -2,7 +2,7 @@
 
 - Cloud path chính: GCP, CPU-only LightGBM.
 - Cloud identity: `gcloud` và Application Default Credentials đã xác thực; thông tin nhận dạng được giữ ngoài Git.
-- Billing: đã liên kết với project.
+- Billing: đã liên kết để chạy Lab, sau đó đã ngắt khỏi project sau khi destroy (`billingEnabled = false`).
 - Budget alert: 100.000 VND/tháng; cảnh báo ở 50%, 90% và 100%.
 - CLI: Google Cloud CLI hoạt động và project đã được chọn.
 - Terraform: v1.15.8; `init`, `fmt -check`, `validate`, `plan`, `apply` đều thành công.

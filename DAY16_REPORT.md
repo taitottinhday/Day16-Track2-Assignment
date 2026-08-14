@@ -35,6 +35,8 @@ During training, the VM reported 0% idle CPU and the Python process used approxi
 
 Cloud resources that can contribute to cost even while the benchmark is idle include the VM, 30 GB SSD boot disk, Cloud NAT, and external HTTP Load Balancer. A monthly budget of 100,000 VND with 50%, 90%, and 100% thresholds was created. The billing console still showed 0 VND for this project during evidence capture because cloud cost reporting is delayed.
 
+After all evidence was collected, Terraform destroyed all 16 resources and independent CLI checks found no VM, disk, address, NAT, load balancer, or custom VPC. Cloud Billing was then unlinked from the project, so `billingEnabled` is now `false`. The project cannot start billable Google Cloud services unless Billing is explicitly linked again.
+
 ## Dataset acquisition note
 
 Kaggle CLI authentication was not available on the machine. The run therefore fetched the same public ULB Credit Card Fraud dataset through OpenML. No Kaggle, Hugging Face, cloud credential, Terraform state, or private key is stored in Git.
@@ -49,3 +51,4 @@ Kaggle CLI authentication was not available on the machine. The run therefore fe
 - `artifacts/gcp_billing_budget.png`: Billing budget and alert thresholds.
 - `artifacts/terraform_destroy_output.txt`: Terraform destroy log (added after cleanup).
 - `artifacts/post_destroy_verification.txt`: verification that billable lab resources no longer exist.
+- `artifacts/billing_disabled_verification.txt`: final zero-cost guard showing Billing disabled.

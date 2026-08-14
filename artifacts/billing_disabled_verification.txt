@@ -1,0 +1,10 @@
+Final billing safety verification
+Date: 2026-08-14 (Asia/Saigon)
+
+BILLING_ENABLED=False
+VM_COUNT=0
+DISK_COUNT=0
+ADDRESS_COUNT=0
+
+Cloud Billing was unlinked after the lab resources were destroyed.
+The project cannot start billable Google Cloud services unless Billing is linked again.
