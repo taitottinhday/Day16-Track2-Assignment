@@ -45,6 +45,7 @@ Kaggle CLI authentication was not available on the machine. The run therefore fe
 
 - `artifacts/benchmark_result.json`: machine-readable benchmark metrics.
 - `artifacts/benchmark_terminal_output.txt`: complete benchmark output from the VM.
+- `artifacts/benchmark_terminal_screenshot.png`: terminal-style rendering generated directly from the saved VM output for visual submission evidence.
 - `artifacts/resource_snapshot.txt`: CPU, RAM, process, and network snapshot captured during training.
 - `artifacts/gcp_vm_details.png`: running private compute instance.
 - `artifacts/gcp_monitoring.png`: GCP CPU and network monitoring charts.
