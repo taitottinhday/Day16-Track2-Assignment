@@ -1,0 +1,12 @@
+Post-destroy GCP verification
+Date: 2026-08-14 (Asia/Saigon)
+
+VM_COUNT=0
+ROUTER_NAT_PARENT_COUNT=0
+FORWARDING_RULE_COUNT=0
+BACKEND_SERVICE_COUNT=0
+VPC_COUNT=0
+TERRAFORM_STATE_RESOURCE_COUNT=0
+
+The lab VM, Cloud NAT parent router, global forwarding rule, backend service,
+custom VPC, and all Terraform-managed resources were absent after destroy.

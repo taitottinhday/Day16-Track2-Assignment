@@ -1,0 +1,11 @@
+Terraform destroy evidence
+Date: 2026-08-14 (Asia/Saigon)
+Working directory: terraform-gcp
+
+terraform plan -destroy:
+Plan: 0 to add, 0 to change, 16 to destroy.
+
+terraform destroy:
+Destroy complete! Resources: 16 destroyed.
+
+Elapsed destroy workflow time: approximately 234 seconds.
