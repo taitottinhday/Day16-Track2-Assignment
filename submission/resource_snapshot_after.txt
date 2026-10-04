@@ -1,0 +1,40 @@
+Sun Oct  4 04:01:10 UTC 2026
+--- top ---
+top - 04:01:10 up 29 min,  1 user,  load average: 0.00, 0.00, 0.00
+Tasks:  89 total,   1 running,  88 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 33.3 us,  0.0 sy,  0.0 ni, 66.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   3924.7 total,   2656.6 free,    486.1 used,   1027.1 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   3438.6 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+      1 root      20   0  102380  12224   9116 S   0.0   0.3   0:02.25 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par+
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 slub_fl+
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 netns
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+     10 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 mm_perc+
+     11 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+
+     12 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+
+     13 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+
+     14 root      20   0       0      0      0 S   0.0   0.0   0:00.07 ksoftir+
+     15 root      20   0       0      0      0 I   0.0   0.0   0:00.19 rcu_pre+
+--- free ---
+               total        used        free      shared  buff/cache   available
+Mem:           3.8Gi       486Mi       2.6Gi       452Ki       1.0Gi       3.4Gi
+Swap:             0B          0B          0B
+--- ip ---
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    RX:  bytes packets errors dropped  missed   mcast
+             0       0      0       0       0       0
+    TX:  bytes packets errors dropped carrier collsns
+             0       0      0       0       0       0
+2: ens4: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:0a:00:00:02 brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast
+     257848101   19957      0       0       0       0
+    TX:  bytes packets errors dropped carrier collsns
+        979297    9219      0       0       0       0
+    altname enp0s4

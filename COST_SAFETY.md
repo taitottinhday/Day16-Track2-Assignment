@@ -1,5 +1,10 @@
 # Cost safety status
 
+> **Reference-only notice:** The status below came from the original clone's
+> GCP run. It is not evidence for Lê Văn Tài and must not be submitted as a
+> personal cloud/billing result. Replace it with the VM, billing, and cleanup
+> evidence from your own Azure/GCP/AWS/OCI run.
+
 Final status after the Day 16 run:
 
 - Terraform destroyed all 16 lab resources.

@@ -24,13 +24,17 @@ Trên GCP, mọi tài nguyên đều thuộc về một **Project**. Bạn cần
 ### Bước 1.2: Kích hoạt các API cần thiết
 Để Terraform có thể tạo tài nguyên (máy ảo, network), bạn cần bật các API tương ứng trên Project. Mở **Cloud Shell** (biểu tượng `>_` trên góc phải) và chạy lệnh:
 ```bash
-gcloud services enable compute.googleapis.com iam.googleapis.com
+gcloud services enable compute.googleapis.com iam.googleapis.com \
+  cloudresourcemanager.googleapis.com iap.googleapis.com oslogin.googleapis.com
 ```
 
 ### Bước 1.3: Cấp quyền IAM (Least Privilege)
 Nếu bạn tự làm lab trên máy cá nhân bằng tài khoản Google của mình (tài khoản đã tạo Project), bạn mặc định có quyền Owner và đã đủ quyền. Tuy nhiên, theo best practice (hoặc nếu phân quyền cho một user/Service Account khác để Terraform chạy), bạn cần vào **IAM & Admin** -> **IAM** và cấp các Roles sau:
 - `Compute Admin` (`roles/compute.admin`): Để tạo Compute Engine (VM, Load Balancer, VPC, Firewall, Cloud NAT).
+- `Service Account Admin` (`roles/iam.serviceAccountAdmin`): Để Terraform tạo và xóa service account của VM.
 - `Service Account User` (`roles/iam.serviceAccountUser`): Để gán Service Account cho máy ảo Compute Engine.
+- `Project IAM Admin` (`roles/resourcemanager.projectIamAdmin`): Để gắn các role Logging/Monitoring mà hạ tầng tạo.
+- `IAP Tunnel User` (`roles/iap.tunnelResourceAccessor`) và `Compute OS Admin Login` (`roles/compute.osAdminLogin`): Để SSH qua IAP với OS Login.
 
 > **Về GPU Quota:** Luồng chính của bài lab này **không cần** xin tăng quota GPU. Nếu bạn muốn làm thêm Phụ lục (tùy chọn) ở cuối bài để triển khai LLM trên GPU, quy trình xin quota được hướng dẫn riêng ở đó.
 
@@ -120,30 +124,30 @@ sudo journalctl -u google-startup-scripts.service -f
 
 Chúng ta sẽ dùng **Credit Card Fraud Detection** — bộ dữ liệu chuẩn cho benchmark ML với 284,807 giao dịch thực.
 
-**Lấy Kaggle API Key:**
-1. Đăng nhập [kaggle.com](https://www.kaggle.com) -> **Settings** -> **API** -> **Create New Token** -> tải về `kaggle.json`.
-2. Copy nội dung vào VM:
+**Lấy Kaggle Legacy API Key:**
+1. Đăng nhập [kaggle.com](https://www.kaggle.com) -> **Settings** -> **API** -> **Legacy API Credentials** -> **Create Legacy API Key** để tải `kaggle.json`. Đây là loại key cần dùng cho lab, kể cả khi bạn đã có token kiểu mới.
+2. Trên VM, tạo file credentials bằng editor; không dán credentials vào Git hay ảnh nộp bài:
 
 ```bash
 mkdir -p ~/.kaggle
-# Tạo file credentials (thay YOUR_USERNAME và YOUR_KEY):
-cat > ~/.kaggle/kaggle.json << 'EOF'
-{"username": "YOUR_KAGGLE_USERNAME", "key": "YOUR_KAGGLE_API_KEY"}
-EOF
+chmod 700 ~/.kaggle
+nano ~/.kaggle/kaggle.json
 chmod 600 ~/.kaggle/kaggle.json
 
 mkdir -p ~/ml-benchmark
 kaggle datasets download -d mlg-ulb/creditcardfraud --unzip -p ~/ml-benchmark/
 ```
 
+Nội dung `kaggle.json` có dạng `{"username": "YOUR_KAGGLE_USERNAME", "key": "YOUR_KAGGLE_API_KEY"}`. Sau khi download, chạy `ls -lh ~/ml-benchmark/creditcard.csv` và xác nhận bằng pandas rằng file có 284.807 dòng, 31 cột, không missing value, target `Class` có 492 dòng fraud.
+
 ### Bước 4.4: Huấn luyện và Inference với LightGBM
 
 Viết một script Python (ví dụ `benchmark.py`) thực hiện:
-1. Load dataset và tách tập train/test.
-2. Huấn luyện một `LGBMClassifier` (hoặc `lightgbm.train`) để phát hiện gian lận.
+1. Load dataset và tách stratified train/validation/test; test chỉ dùng đánh giá cuối.
+2. Huấn luyện một `LGBMClassifier` với validation và early stopping để phát hiện gian lận.
 3. Đo thời gian load data và thời gian training.
 4. Đánh giá model trên tập test: AUC-ROC, Accuracy, F1-Score, Precision, Recall.
-5. Đo **inference latency** (dự đoán 1 dòng) và **inference throughput** (dự đoán 1000 dòng).
+5. Warm-up ngoài thời gian đo, sau đó đo median **inference latency** (dự đoán 1 dòng) và **inference throughput** (batch 1000 dòng, đơn vị rows/second).
 6. Ghi toàn bộ kết quả ra file `benchmark_result.json`.
 
 Chạy script và điền kết quả vào bảng:

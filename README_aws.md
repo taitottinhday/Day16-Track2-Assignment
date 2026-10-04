@@ -64,6 +64,13 @@ ssh-keygen -t rsa -b 4096 -f lab-key -N ""
 ```
 Lệnh này tạo ra hai file: `lab-key` (private key, giữ bí mật) và `lab-key.pub` (public key, Terraform sẽ đọc file này). Cả hai đã nằm trong `.gitignore` nên sẽ không bị commit nhầm.
 
+Trước khi chạy `plan` hoặc `apply`, chỉ định IPv4 public hiện tại của laptop theo dạng `/32`. Không dùng `0.0.0.0/0` và không điền IPv6:
+```bash
+export TF_VAR_bastion_ssh_cidr="$(curl -4 -s https://ifconfig.me)/32"
+echo "$TF_VAR_bastion_ssh_cidr"
+```
+Nếu đổi Wi-Fi hoặc VPN, hãy lấy lại IP và chạy lại `terraform plan` trước khi SSH.
+
 *(Nếu bạn định làm Phụ lục GPU + LLM ở cuối bài, phần đó cần thêm một Hugging Face Token — sẽ được hướng dẫn lấy ngay tại đó, không cần chuẩn bị trước.)*
 
 ---
@@ -85,7 +92,7 @@ terraform init
 ```
 
 ### Bước 3.2: Triển khai (Apply)
-Với luồng CPU mặc định, bạn **không cần khai báo biến môi trường nào cả** — chỉ cần chạy:
+Với luồng CPU mặc định, sau khi đã đặt `TF_VAR_bastion_ssh_cidr`, chạy:
 ```bash
 terraform apply
 ```

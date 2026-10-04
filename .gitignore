@@ -20,3 +20,11 @@ lab-key.pub
 # Environment Variables
 .env
 .env.local
+
+# Personal benchmark output and submission evidence: create these locally after
+# your own cloud run; never reuse or commit another student's evidence.
+artifacts/
+submission/
+benchmark_result.json
+benchmark_terminal_output.txt
+__pycache__/

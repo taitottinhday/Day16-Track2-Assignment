@@ -12,4 +12,4 @@
 7. CPU/RAM/Network được quan sát **sau** benchmark lúc `2026-10-04 04:01:10 UTC`: CPU snapshot 33.3% user/66.7% idle, RAM 3.8 GiB tổng và 486 MiB đã dùng; bằng chứng: `submission/resource_snapshot_after.txt` và ảnh `submission/screenshots/02_resource_snapshot.png`.
 8. Trang Welcome của project hiển thị **₫7.791.151 credit, ₫0 đã dùng, hết hạn 2027-01-02**; Payment overview cũng hiển thị khoản manual payment credit **−₫800.000**. Đã chạy `terraform destroy -auto-approve` sau benchmark: Terraform xác nhận **16 resources destroyed**; `terraform state list` rỗng và kiểm tra GCP sau destroy không còn VM, forwarding rule hay mạng `ai-vpc` của lab (mạng `default` mặc định của project vẫn còn).
 
-> Các số đo và ảnh trong bản clone trước đó không thuộc lần chạy của Lê Văn Tài và không được dùng để nộp. Chỉ điền các ô `[ .. ]` sau khi chạy trên tài khoản cloud của chính bạn.
+>

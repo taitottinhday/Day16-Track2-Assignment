@@ -4,6 +4,19 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "bastion_ssh_cidr" {
+  description = "Public IPv4 CIDR allowed to SSH to the Bastion; must be the laptop IPv4 address with /32"
+  type        = string
+  nullable    = false
+
+  validation {
+    condition = can(cidrhost(var.bastion_ssh_cidr, 0)) && can(
+      regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}/32$", var.bastion_ssh_cidr)
+    )
+    error_message = "bastion_ssh_cidr must be a public IPv4 address in /32 notation, for example 203.0.113.10/32."
+  }
+}
+
 variable "hf_token" {
   description = "Hugging Face Token for gated models (like Gemma)"
   type        = string

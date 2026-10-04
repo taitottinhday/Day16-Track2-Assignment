@@ -20,7 +20,7 @@ Chọn một trong hai phần bên dưới tùy theo cloud bạn có tài khoả
 ## A.Phần 1: Chuẩn bị tài khoản Azure và IAM (Least-Privilege)
 
 ### Bước 1.1: Tạo/đăng nhập Azure Subscription
-1. Đăng nhập [Azure Portal](https://portal.azure.com/) (tài khoản mới nhận **$200 credit** dùng trong 30 ngày).
+1. Đăng nhập [Azure Portal](https://portal.azure.com/). Nếu dùng **Azure for Students**, đăng ký bằng tài khoản Microsoft cá nhân và xác minh bằng email trường; ưu đãi hiện là **$100 credit trong 12 tháng, không yêu cầu thẻ**. Gói **Azure Free Trial $200 trong 30 ngày** là ưu đãi khác và thường yêu cầu phương thức thanh toán, không được ghi nhầm là Azure for Students.
 2. Ghi lại **Subscription ID** của bạn (Search "Subscriptions" trên thanh tìm kiếm).
 
 ### Bước 1.2: Tạo Resource Group riêng cho lab
